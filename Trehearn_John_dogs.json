@@ -1,0 +1,51 @@
+[
+    {
+        "number":7,
+        "name":"Barky",
+        "length":70,
+        "weightKg":20,
+        "breed":"spaniel"
+    },
+    {
+        "number":4,
+        "name":"Rex",
+        "length":50,
+        "weightKg":7,
+        "breed":"muddypaw"
+    },
+    {
+        "number":3,
+        "name":"Grand Duke of S.Q.L",
+        "length":35,
+        "weightKg":45,
+        "breed":"furry tail-wagger"
+    },
+    {
+        "number":6,
+        "name":"Gigant Howler",
+        "length":30,
+        "weightKg":5,
+        "breed":"datahound"
+    },
+    {
+        "number":2,
+        "name":"Hound of Basker W.I.11e",
+        "length":20,
+        "weightKg":10,
+        "breed":"bulldog"
+    },
+    {
+        "number":5,
+        "name":"Canine The III",
+        "length":42,
+        "weightKg":1,
+        "breed":"watchdog"
+    },
+    {
+        "number":1,
+        "name":"Spot",
+        "length":40,
+        "weightKg":15,
+        "breed":"lapdog"
+    }
+]
