@@ -1,0 +1,6 @@
+
+    {
+        "storageFile":"Trehearn_John_dogs.json",
+        "adapterFile":"dogAdapter.js",
+        "primary_key":"number"
+    }
