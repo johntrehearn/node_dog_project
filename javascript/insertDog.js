@@ -1,17 +1,57 @@
 'use strict';
 
-(function(){
+(function () {
+  let number;
+  let name;
+  let length;
+  let weightKg;
 
-    let number;
-    let name;
-    let length;
-    let weightK
-})
+  document.addEventListener('DOMContentLoaded', init);
 
+  function init() {
+    resultarea = document.getElementById('resultarea');
+    number = document.getElementById('number');
+    length = document.getElementById('length');
+    weightKg = document.getElementById('weightKg');
+    breed = document.getElementById('breed');
 
+    document.getElementById('submit').addEventListener('click', send);
 
-"number":5,
-"name":Canine The III,
-"length":42,
-"weightKg":1,
-"breed":watchdog
+    number.addEventListener('focus', clear);
+  }
+
+  function clear() {
+    number.value = '';
+    length.value = '';
+    weightKg.value = '';
+    resultarea.textContent = '';
+    resultarea.removeAttribute('class');
+  }
+
+  async function send() {
+    const dog = {
+      number: +numberField.value,
+      length: lengthField.value,
+      weightKg: weightKg.value,
+    };
+
+    try {
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(dog),
+        headers: {'Content-Type': 'application/json'},
+      };
+      const data = await fetch('/addDog', options);
+      const result = await data.json();
+
+      updateStatus(result);
+    } catch (err) {
+      updateStatus({message: err.message, type: 'error'});
+    }
+  }
+
+  function updateStatus(status) {
+    resultsarea.textContent = status.message;
+    resultarea.setAttribute('class', status.type);
+  }
+})();

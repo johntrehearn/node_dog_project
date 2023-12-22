@@ -15,6 +15,7 @@ const {
 } = require(path.join(__dirname, library.folder, library.requestHandler));
 
 const storageEnginePath = path.join(__dirname, storageEngine.folder);
+
 const dataStoragePath = path.join(
   storageEnginePath,
   storageEngine.dataStorageFile
@@ -23,18 +24,16 @@ const dataStoragePath = path.join(
 const storagePath = path.join(__dirname, storage.folder);
 
 const {createDataStorage} = require(dataStoragePath);
+
 const register = createDataStorage(storagePath, storage.storageConfigFile);
 
-const resourceRoutes = ['/pages/', '/styles/', '/js/', '/images/'];
+const resourceRoutes = ['/pages/', '/styles', '/js/', '/images/'];
 
 const homePath = path.join(__dirname, 'menu.html');
 
 const server = http.createServer(async (req, res) => {
   const {pathname} = new URL(`http://${req.headers.host}${req.url}`);
   const route = decodeURIComponent(pathname);
-
-  // console.log(pathname);
-  // console.log(route);
 
   const method = req.method.toUpperCase();
 
@@ -54,32 +53,39 @@ const server = http.createServer(async (req, res) => {
         send(res, await read(homePath));
       }
     } else {
-      sendError(res, 'Resource not found', register.TYPES.ERROR);
+      sendError(res, 'Dog not found', register.TYPES.ERROR);
     }
   } else if (method === 'POST') {
     if (route === '/search') {
       const body = await getRequestPostBodyData(req);
       sendJson(res, await register.get(body.value, body.key));
-    } else if (route === '/addPerson') {
+    } else if (route === '/addDog') {
       const body = await getRequestPostBodyData(req);
       register
         .insert(body)
         .then((result) => sendJson(res, result))
         .catch((error) => sendJson(res, error));
-    } else if (route === '/remove') {
+    } else if (route === '/removedog') {
       const body = await getRequestPostBodyData(req);
       register
         .remove(body.value)
         .then((result) => sendJson(res, result))
         .catch((error) => sendJson(res, error));
     } else {
-      sendError(res, 'Resource not found', register.TYPES.ERROR);
+      sendError(res, 'Dog not found', register.TYPES.ERROR);
     }
   } else {
-    sendError(res, 'method not in use', register.TYPES.ERROR, 405);
+    {
+      sendError(
+        res,
+        'Dogs cannot use this method - woof',
+        register.TYPES.ERROR,
+        405
+      );
+    }
   }
 });
 
 server.listen(port, host, () =>
-  console.log(`Server ${host}:${port} serving...`)
+  console.log(`Dog server is woofing at ${host}:${port}`)
 );
